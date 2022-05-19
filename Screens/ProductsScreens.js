@@ -1,17 +1,20 @@
-import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TextInput, TouchableOpacity,Keyboard, View, KeyboardAvoidingView, TouchableWithoutFeedback } from 'react-native'
 import React, { useEffect, useState } from 'react';
 import Searcher from '../Components/Searcher';
 import { Entypo } from '@expo/vector-icons';
-import { PRODUCTS } from '../Data/products';
+import { PRODUCTS } from '../Data/Products';
 import Header from '../Components/Header';
 import { colors } from '../Styles/colors';
 import List from '../Components/List';
+import {  } from 'react-native';
 
-const ProductsScreen = ({category = {id: 1, category: "Ropa"}, handleCategory}) => {
+const ProductsScreen = ({category = {id: 1, category: "Ropa"}, navigation, route}) => {
 
     const [input, setInput] = useState("");
     const [initialProducts, setInitialProducts] = useState([])
     const [productsFiltered, setProductsFiltered] = useState([])
+
+    const {categoryId} = route.params;
 
     const handleErase = () => {
         setInput("")
@@ -27,12 +30,30 @@ const ProductsScreen = ({category = {id: 1, category: "Ropa"}, handleCategory}) 
     }, [input, initialProducts])
 
     useEffect(()=>{
-        const productosIniciales = PRODUCTS.filter(product => product.category === category.id)
+        const productosIniciales = PRODUCTS.filter(product => product.category === categoryId)
         setInitialProducts(productosIniciales);
-    }, [])
+    }, [categoryId])
+
+    const handleDetailProduct = (product) => {
+        console.log("Se navegará hacia el detail");
+        navigation.navigate("Detail", {
+            productId: product.id,
+            productTitle: product.description,
+        }); }
+
+    const handleBack = () => {
+        navigation.goBack();
+    }
     return (
         <>
-            <Header title={category.category}/>
+        <KeyboardAvoidingView
+         behavior={Platform.OS === "ios" ? "padding" : "height"}
+         style={styles.keyboardAvoid}
+         keyboardVerticalOffset={10}
+       >
+            {/* <Header title={category.category}/> */}
+             <TouchableWithoutFeedback onPress={Keyboard.dismiss}> 
+    
             <View style={styles.container}>
                 <Searcher additionalStyles={{
                     backgroundColor: colors.colorPrimary
@@ -49,20 +70,25 @@ const ProductsScreen = ({category = {id: 1, category: "Ropa"}, handleCategory}) 
                     </TouchableOpacity>
                 </Searcher>
                 <View style={styles.listContainer}>
-                    <List data={productsFiltered} itemType ={"Producto"} onPress={()=> {}}/>
-                    <TouchableOpacity style={styles.button} title='Volver' onPress={()=>handleCategory(null)}>
+                    <List data={productsFiltered} itemType ={"Producto"} onPress={handleDetailProduct}/>
+                    <TouchableOpacity style={styles.button} onPress={handleBack}>
                         <Text style={styles.button}>Volver</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-
-        </>
+            
+              </TouchableWithoutFeedback> 
+         </KeyboardAvoidingView>
+         </>
     )
 }
 
 export default ProductsScreen
 
 const styles = StyleSheet.create({
+    keyboardAvoid: {
+        flex: 1,
+    },
     container: {
         flex: 1,
         width: '100%',

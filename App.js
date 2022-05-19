@@ -1,17 +1,20 @@
-import { useState } from 'react';
-import { ActivityIndicator, StyleSheet, View } from 'react-native';
-import CategoriesScreen from './Screens/CategoriesScreens';
-import ProductsScreen from './Screens/ProductsScreens';
+import { ActivityIndicator, StyleSheet } from 'react-native';
 import {useFonts} from 'expo-font';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import MainNavigator from './Navigation/Shop';
 
 export default function App() {
 
-  const [categorySelected, setCategorySelected] = useState(null)
-
+/*   const [categorySelected, setCategorySelected] = useState(null);
+  const [productSelected, setProductSelected] = useState(null);
   const handleCategory = (category) => {
+    // console.log(category);
     setCategorySelected(category)
   }
-
+  const handleProduct = (product) => {
+    // console.log(category);
+    setProductSelected(product)
+  } */
   const [loaded] = useFonts({
     Karla: require('./assets/Fonts/static/Karla-Regular.ttf')
   });
@@ -20,16 +23,15 @@ export default function App() {
     return <ActivityIndicator/>;
   }
 
+  console.log(loaded);
+
   return (
-    <View style={style.container}>
-      { categorySelected ?
-        <ProductsScreen category={categorySelected} handleCategory={handleCategory}/>
-        :
-        <CategoriesScreen handleCategory = {handleCategory}/>
-      }
-    </View>
+    <SafeAreaView style={{ flex: 1 }}>
+      <MainNavigator/>
+    </SafeAreaView>
   );
 }
+
 
 const style = StyleSheet.create({
   container: {
