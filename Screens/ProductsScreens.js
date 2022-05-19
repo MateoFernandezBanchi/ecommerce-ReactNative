@@ -70,7 +70,7 @@ const ProductsScreen = ({category = {id: 1, category: "Ropa"}, navigation, route
                     </TouchableOpacity>
                 </Searcher>
                 <View style={styles.listContainer}>
-                    <List data={productsFiltered} itemType ={"Producto"} onPress={handleDetailProduct}/>
+                    <List style={styles.listItems} data={productsFiltered} itemType ={"Producto"} onPress={handleDetailProduct}/>
                     <TouchableOpacity style={styles.button} onPress={handleBack}>
                         <Text style={styles.button}>Volver</Text>
                     </TouchableOpacity>

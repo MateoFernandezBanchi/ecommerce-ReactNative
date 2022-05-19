@@ -1,6 +1,5 @@
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, useWindowDimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import Header from '../Components/Header'
 import { PRODUCTS } from '../Data/Products'
 
 
@@ -26,7 +25,8 @@ const DetailScreen = ({ route, navigation
     }, [productId])
     return (
         <>
-            {/* <Header title={product.description} /> */}
+            { 
+           product && 
             <View style={orientation === "portrait" ? styles.containerVertical : styles.containerHorizontal}>
                 <Image
                     source={{ uri: product.image }}
@@ -39,7 +39,8 @@ const DetailScreen = ({ route, navigation
                         <Text style={styles.button}>Volver</Text>
                     </TouchableOpacity>
             </View>
-        </>
+            }
+            </>
     )
 }
 
