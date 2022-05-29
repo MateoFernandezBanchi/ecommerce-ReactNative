@@ -1,7 +1,8 @@
-import { ActivityIndicator, StyleSheet } from 'react-native';
+import { ActivityIndicator } from 'react-native';
 import {useFonts} from 'expo-font';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import MainNavigator from './Navigation/Shop';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
+import MainNavigator from './Navigation';
+
 
 export default function App() {
 
@@ -26,17 +27,10 @@ export default function App() {
   console.log(loaded);
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaProvider>
+    {/* <SafeAreaView style={{ flex: 1 }}> */}
       <MainNavigator/>
-    </SafeAreaView>
+    {/* </SafeAreaView> */}
+    </SafeAreaProvider>
   );
 }
-
-
-const style = StyleSheet.create({
-  container: {
-    flex: 1,
-    flexDirection: 'column',
-    alignItems: 'center',
-  }
-})

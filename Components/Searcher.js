@@ -1,12 +1,15 @@
 import { StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import { colors } from '../Styles/colors'
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const Searcher = ({children, additionalStyles}) => {
     return (
+        <SafeAreaView>
         <View style={{...styles.searcherContainer, ...additionalStyles}}>
             {children}
         </View>
+        </SafeAreaView>
     )
 }
 
