@@ -7,15 +7,20 @@ const formatDay = (time) => {
     return date.toLocaleDateString();
 }
 
-const OrderItem = ({item}) => {
-  return (
-    <View style={styles.order}>
+const OrderItem = ({ item }) => {
+    return (
         <View>
-            <Text style={styles.date}>{formatDay(item.date)}</Text>
-            <Text style={styles.total}>${item.total}</Text>
+            <View>
+                <Text style={styles.header}>{item.description}</Text>
+            </View>
+            <View style={styles.order}>
+                <View>
+                    <Text style={styles.date}>{formatDay(item.date)}</Text>
+                    <Text style={styles.total}>${item.total}</Text>
+                </View>
+            </View>
         </View>
-    </View>
-  )
+    )
 }
 
 export default OrderItem
@@ -31,7 +36,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderRadius: 6,
     },
-    date:{
+    date: {
         fontSize: 18,
     },
     total: {

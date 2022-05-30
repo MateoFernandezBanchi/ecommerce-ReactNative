@@ -1,4 +1,3 @@
-import { StyleSheet} from 'react-native'
 import React from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import OrdersScreen from '../../../Screens/OrdersScreen';
@@ -11,9 +10,9 @@ const OrdersStack = () => {
     <Stack.Navigator initialRouteName=""
         screenOptions={{
           headerStyle: {
-            backgroundColor: colors.darkBlue
+            backgroundColor: colors.colorPrimary
           },
-          headerTintColor: "white",
+          headerTintColor: "black",
           headerTitleStyle: {
             fontFamily: "Karla",
             fontSize: 28,
@@ -37,5 +36,3 @@ const OrdersStack = () => {
 }
 
 export default OrdersStack
-
-const styles = StyleSheet.create({})

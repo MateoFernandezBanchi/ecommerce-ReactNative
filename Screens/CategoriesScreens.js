@@ -7,6 +7,7 @@ import List from '../Components/List';
 import {CATEGORIES} from '../Data/Categories';
 import { Entypo } from '@expo/vector-icons';
 
+
 const CategoriesScreen = ({navigation}) => {
 
     const [input, setInput] = useState("")
@@ -36,6 +37,7 @@ const CategoriesScreen = ({navigation}) => {
     return (
         <>
             {/* <Header color="#FAC179" /> */}
+      
             <View style={styles.container}>
                 <Searcher additionalStyles={{
                     backgroundColor: colors.colorPrimary
@@ -55,6 +57,7 @@ const CategoriesScreen = ({navigation}) => {
                     <List data={categoriesFilter} onPress={handleSelectedCategory}/>
                 </View>
             </View>
+           
         </>
     )
 }

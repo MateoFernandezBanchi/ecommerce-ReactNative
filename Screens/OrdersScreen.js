@@ -2,7 +2,6 @@ import { FlatList, StyleSheet, Text, View } from 'react-native'
 import React from 'react'
 import OrderItem from '../Components/OrderItem'
 import { ORDERS } from '../Data/Order'
-import { colors } from '../Styles/colors'
 
 
 const renderItem = ({item}) => (

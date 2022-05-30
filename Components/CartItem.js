@@ -2,9 +2,11 @@ import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import React from 'react'
 import { colors } from '../Styles/colors';
 import {Ionicons} from '@expo/vector-icons';
+import { SafeAreaView } from 'react-native-safe-area-context'
 
 const CartItem = ({item, onDelete}) => {
   return (
+    <SafeAreaView>
     <View style={styles.item}>
       <View>
         <Text style={styles.header}>{item.description}</Text>
@@ -20,6 +22,7 @@ const CartItem = ({item, onDelete}) => {
       </View>
 
     </View>
+    </SafeAreaView>
   )
 }
 
