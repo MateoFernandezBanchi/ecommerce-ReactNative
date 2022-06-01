@@ -24,10 +24,11 @@ const TabNavigatorLogged = () => {
                 component={ShopNavigator}
                 options={{
                     tabBarIcon: ({ focused }) => {
+                        return (
                         <View styles={styles.item}>
                             <Entypo name="shop" size={24} color="black" />
                             <Text>Shop</Text>
-                        </View>
+                        </View>)
                     }
                 }}
             />
@@ -36,10 +37,11 @@ const TabNavigatorLogged = () => {
                 component={CartStack}
                 options={{
                     tabBarIcon: ({ focused }) => {
+                        return (
                         <View styles={styles.item}>
                             <Feather name="shopping-cart" size={24} color="black" />
                             <Text>Cart</Text>
-                        </View>
+                        </View>)
                     }
                 }}
             />

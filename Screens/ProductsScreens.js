@@ -2,40 +2,42 @@ import { StyleSheet, Text, TextInput, TouchableOpacity,Keyboard, View, KeyboardA
 import React, { useEffect, useState } from 'react';
 import Searcher from '../Components/Searcher';
 import { Entypo } from '@expo/vector-icons';
-import { PRODUCTS } from '../Data/Products';
-import Header from '../Components/Header';
+// import { PRODUCTS } from '../Data/Products';
+// import Header from '../Components/Header';
 import { colors } from '../Styles/colors';
 import List from '../Components/List';
-import {  } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
+
 
 const ProductsScreen = ({category = {id: 1, category: "Ropa"}, navigation, route}) => {
-
+    const {products} = useSelector(state => state.products.value)
     const [input, setInput] = useState("");
-    const [initialProducts, setInitialProducts] = useState([])
+    // const [initialProducts, setInitialProducts] = useState([])
     const [productsFiltered, setProductsFiltered] = useState([])
-
+    const {productsByCategory} = useSelector(state => state.products.value)
+    const dispatch = useDispatch();
     const {categoryId} = route.params;
 
     const handleErase = () => {
         setInput("")
     }
     useEffect(()=> {
-        if(initialProducts.length !== 0){
-            if (input === "") setProductsFiltered(initialProducts)
+        if(productsByCategory.length !== 0){
+            if (input === "") setProductsFiltered(productsByCategory)
             else {
-                const productosFiltrados = initialProducts.filter(product => product.description.toLowerCase().includes(input.toLowerCase()))
+                const productosFiltrados = productsByCategory.filter(product => product.description.toLowerCase().includes(input.toLowerCase()))
                 setProductsFiltered(productosFiltrados)
             }
         }
-    }, [input, initialProducts])
+    }, [input, productsByCategory])
 
-    useEffect(()=>{
-        const productosIniciales = PRODUCTS.filter(product => product.category === categoryId)
-        setInitialProducts(productosIniciales);
-    }, [categoryId])
+    // useEffect(()=>{
+    //     const productosIniciales = products.filter(product => product.category === categoryId)
+    //     setInitialProducts(productosIniciales);
+    // }, [categoryId])
 
     const handleDetailProduct = (product) => {
-        console.log("Se navegará hacia el detail");
+        dispatch(setProductsFiltered(product.id))
         navigation.navigate("Detail", {
             productId: product.id,
             productTitle: product.description,
@@ -47,7 +49,7 @@ const ProductsScreen = ({category = {id: 1, category: "Ropa"}, navigation, route
     return (
         <>
         <KeyboardAvoidingView
-         behavior={Platform.OS === "ios" ? "padding" : "height"}
+        //  behavior={Platform.OS === "ios" ? "padding" : "height"}
          style={styles.keyboardAvoid}
          keyboardVerticalOffset={10}
        >

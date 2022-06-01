@@ -1,28 +1,35 @@
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, useWindowDimensions } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { PRODUCTS } from '../Data/Products'
-
+import { addItem } from '../Features/Cart';
+import { useDispatch, useSelector } from 'react-redux';
 
 const DetailScreen = ({ route, navigation
 }) => {
-
-    const {productId} = route.params;
+    const dispatch = useDispatch();
+    // const {productId} = route.params;
     const { height, width } = useWindowDimensions();
     const [orientation, setOrientation] = useState("portrait");
-    const [product, setProduct] = useState({});
+    // const [product, setProduct] = useState({});
+    const {product} = useSelector(state => state.products.value)
 
     useEffect(() => {
         setOrientation(height > width ? "portrait" : "landscape")
     }, [height, width])
-
+    
     const handleBack = () => {
         navigation.goBack();
     }
 
-    useEffect(() => {
-        const productSelected = PRODUCTS.find(product => product.id === productId)
-        setProduct(productSelected)
-    }, [productId])
+    // useEffect(() => {
+    //     const productSelected = PRODUCTS.find(product => product.id === productId)
+    //     setProduct(productSelected)
+    // }, [productId])
+
+    const handleAdd = (id) => {
+        dispatch(addItem({id: id}))
+    }
+
     return (
         <>
             { 
@@ -38,6 +45,7 @@ const DetailScreen = ({ route, navigation
                 <TouchableOpacity style={styles.button} onPress={handleBack}>
                         <Text style={styles.button}>Volver</Text>
                     </TouchableOpacity>
+                    <Button title="Add to Cart" onPress={()=>handleAdd(product.id)}/>
             </View>
             }
             </>

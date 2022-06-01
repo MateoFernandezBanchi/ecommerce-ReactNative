@@ -1,26 +1,31 @@
-import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native'
-import React from 'react'
-import { colors } from '../Styles/colors'
-import { PRODUCTSELECTED } from '../Data/ProductSelected'
-import CartItem from '../Components/CartItem'
+import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
+import React from 'react';
+import { colors } from '../Styles/colors';
+// import { PRODUCTSELECTED } from '../Data/ProductSelected'
+import CartItem from '../Components/CartItem';
+import { useSelector, useDispatch } from 'react-redux';
 
 
 const handleDelete = (id) => console.log ('se elimina del carrito el producto con id: ${id}');
-const handleConfirm = () => console.log ('compra confirmada');
 
- const renderItem = (data) => {
-     <CartItem item={data.item} onDelete={handleDelete}/>
- }
+const renderItem = (data) => {
+    <CartItem item={data.item} onDelete={handleDelete}/>
+}
 
 const CartScreen = () => {
-
+    
+    const dispatch = useDispatch();
+    const {cart} = useSelector(state => state.cart.value)
+    const handleConfirm = () => {
+        dispatch(confirmPurchase(cart))
+    };
     const total = 12000; 
 
   return (
     <View style={styles.container}>
        <View style={styles.list}>
            <FlatList 
-              data={PRODUCTSELECTED}
+              data={cart}
               keyExtractor ={item => item.id}
               renderItem={renderItem}
            />
