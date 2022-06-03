@@ -9,12 +9,12 @@ import List from '../Components/List';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const ProductsScreen = ({category = {id: 1, category: "Ropa"}, navigation, route}) => {
-    const {products} = useSelector(state => state.products.value)
+const ProductsScreen = ({navigation, route}) => {
+    const {products} = useSelector(state => state.products.value);
     const [input, setInput] = useState("");
     // const [initialProducts, setInitialProducts] = useState([])
-    const [productsFiltered, setProductsFiltered] = useState([])
-    const {productsByCategory} = useSelector(state => state.products.value)
+    const [productsFiltered, setProductsFiltered] = useState([]);
+    const {productsByCategory} = useSelector(state => state.products.value);
     const dispatch = useDispatch();
     const {categoryId} = route.params;
 
@@ -37,7 +37,8 @@ const ProductsScreen = ({category = {id: 1, category: "Ropa"}, navigation, route
     // }, [categoryId])
 
     const handleDetailProduct = (product) => {
-        dispatch(setProductsFiltered(product.id))
+        console.log(product);
+        dispatch(setProductsFiltered(product.id));
         navigation.navigate("Detail", {
             productId: product.id,
             productTitle: product.description,
