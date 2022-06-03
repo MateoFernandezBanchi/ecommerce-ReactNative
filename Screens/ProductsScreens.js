@@ -7,7 +7,7 @@ import { Entypo } from '@expo/vector-icons';
 import { colors } from '../Styles/colors';
 import List from '../Components/List';
 import { useDispatch, useSelector } from 'react-redux';
-
+import { setProductSelected } from '../features/products';
 
 const ProductsScreen = ({navigation, route}) => {
     const {products} = useSelector(state => state.products.value);
@@ -38,8 +38,9 @@ const ProductsScreen = ({navigation, route}) => {
 
     const handleDetailProduct = (product) => {
         console.log(product);
-        dispatch(setProductsFiltered(product.id));
-        navigation.navigate("Detail", {
+        dispatch(setProductSelected(product.id))
+        // dispatch(setProductsFiltered(product.id));
+        navigation.push("Detail", {
             productId: product.id,
             productTitle: product.description,
         }); }

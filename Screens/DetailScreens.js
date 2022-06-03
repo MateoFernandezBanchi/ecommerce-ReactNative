@@ -1,8 +1,9 @@
-import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, useWindowDimensions } from 'react-native'
+import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, useWindowDimensions, Button } from 'react-native'
 import React, { useEffect, useState } from 'react'
 import { PRODUCTS } from '../Data/Products'
 import { addItem } from '../Features/Cart';
 import { useDispatch, useSelector } from 'react-redux';
+
 
 const DetailScreen = ({ route, navigation
 }) => {
@@ -11,11 +12,12 @@ const DetailScreen = ({ route, navigation
     const { height, width } = useWindowDimensions();
     const [orientation, setOrientation] = useState("portrait");
     // const [product, setProduct] = useState({});
-    const {product} = useSelector(state => state.products.value)
+    const {productSelected} = useSelector(state => state.products.value)
+    console.log(productSelected);
 
-    useEffect(() => {
-        setOrientation(height > width ? "portrait" : "landscape")
-    }, [height, width])
+    // useEffect(() => {
+    //     setOrientation(height > width ? "portrait" : "landscape")
+    // }, [height, width])
     
     const handleBack = () => {
         navigation.goBack();
@@ -33,19 +35,19 @@ const DetailScreen = ({ route, navigation
     return (
         <>
             { 
-           product && 
+           productSelected && 
             <View style={orientation === "portrait" ? styles.containerVertical : styles.containerHorizontal}>
                 <Image
-                    source={{ uri: product.image }}
+                    source={{ uri: productSelected.image }}
                     style={styles.image}
                     resizeMode="cover"
                 />
-                <Text>{product.description}</Text>
-                <Text>$ {product.price}</Text>
+                <Text>{productSelected.description}</Text>
+                <Text>$ {productSelected.price}</Text>
                 <TouchableOpacity style={styles.button} onPress={handleBack}>
                         <Text style={styles.button}>Volver</Text>
                     </TouchableOpacity>
-                    <Button title="Add to Cart" onPress={()=>handleAdd(product.id)}/>
+                    <Button title="Add to Cart" onPress={()=>handleAdd(productSelected.id)}/>
             </View>
             }
             </>
