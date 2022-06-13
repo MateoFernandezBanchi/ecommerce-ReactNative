@@ -2,17 +2,14 @@ import { StyleSheet, Text, TextInput, TouchableOpacity,Keyboard, View, KeyboardA
 import React, { useEffect, useState } from 'react';
 import Searcher from '../Components/Searcher';
 import { Entypo } from '@expo/vector-icons';
-// import { PRODUCTS } from '../Data/Products';
-// import Header from '../Components/Header';
 import { colors } from '../Styles/colors';
 import List from '../Components/List';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProductSelected } from '../features/products';
+import { setProductSelected } from '../Features/Products';
 
 const ProductsScreen = ({navigation, route}) => {
-    const {products} = useSelector(state => state.products.value);
+    // const {products} = useSelector(state => state.products.value);
     const [input, setInput] = useState("");
-    // const [initialProducts, setInitialProducts] = useState([])
     const [productsFiltered, setProductsFiltered] = useState([]);
     const {productsByCategory} = useSelector(state => state.products.value);
     const dispatch = useDispatch();

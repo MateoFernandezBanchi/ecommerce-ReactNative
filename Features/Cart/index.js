@@ -1,6 +1,6 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import { DB_URL } from "../../Constants/firebase";
-import { PRODUCTS } from "../../Data/Products";
+import { PRODUCTS } from "../../Data/ProductsData";
 const initialState = {
     value: {
         cart: [],
@@ -10,7 +10,7 @@ const initialState = {
     }
 };
 
-const confirmPurchase = createAsyncThunk(
+export const confirmPurchase = createAsyncThunk(
     'cart/confirm',
     async (items, asyncThunk) => {
         const res = await fetch(
@@ -26,7 +26,7 @@ const confirmPurchase = createAsyncThunk(
         return data;
     }
 )
-export const cartSlice = createSlice({
+const cartSlice = createSlice({
     name: 'cart',
     initialState: initialState,
     reducers: {
@@ -38,12 +38,13 @@ export const cartSlice = createSlice({
                     return item
                 });
             } else {
-                const product = PRODUCTS.value.products.find(product => product.id === action.payload.id);
+                const product = PRODUCTS.find(product => product.id === action.payload.id);
+                console.log(product)
+                // const product = store.getState().products.value.products.find(product => product.id === action.payload);
                 state.value.cart.push({ ...product, quantity: 1 });
             }
         },
         removeItem: () => { },
-
 
     },
     extraReducers: {
@@ -55,6 +56,7 @@ export const cartSlice = createSlice({
         },
         [confirmPurchase.rejected]: (state) => {
             state.value.loading = false;
+            state.value.error = true;
         }
     }
 });

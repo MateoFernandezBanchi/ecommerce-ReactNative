@@ -6,7 +6,7 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 
 const CartItem = ({item, onDelete}) => {
   return (
-    <SafeAreaView>
+
     <View style={styles.item}>
       <View>
         <Text style={styles.header}>{item.description}</Text>
@@ -22,7 +22,7 @@ const CartItem = ({item, onDelete}) => {
       </View>
 
     </View>
-    </SafeAreaView>
+    
   )
 }
 
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     header: {
         fontSize: 18,
         fontFamily: 'Karla',
+        color:'white'
     },
     detail: {
         flex: 1,
@@ -49,6 +50,6 @@ const styles = StyleSheet.create({
     text: {
         fontSize: 16,
         fontFamily: 'Karla',
-        color:'black'
+        color:'white'
     }
 })

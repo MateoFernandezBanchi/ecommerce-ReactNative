@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, useWindowDimensions, Button } from 'react-native'
 import React, { useEffect, useState } from 'react'
-import { PRODUCTS } from '../Data/Products'
+import { PRODUCTS } from '../Data/ProductsData'
 import { addItem } from '../Features/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 

@@ -1,16 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit"
-import { CATEGORIES } from "../../Data/Categories"
+import { CATEGORY } from "../../Data/CategoriesData.js"
 
 const initialState = {
     value: {
-        categories: CATEGORIES,
+        categories: CATEGORY,
         categorySelected: "",
     }
 }
 
 export const categoriesSlice = createSlice({
     name: "categories",
-    initialState: initialState,
+    initialState,
     reducers:{
         selectedCategory: (state, action) => {
             const categorySelected = state.value.categories.find(category => 

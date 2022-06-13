@@ -4,18 +4,21 @@ import { colors } from '../Styles/colors';
 // import { PRODUCTSELECTED } from '../Data/ProductSelected'
 import CartItem from '../Components/CartItem';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { confirmPurchase } from '../Features/Cart';
 
 const handleDelete = (id) => console.log ('se elimina del carrito el producto con id: ${id}');
-
 const renderItem = (data) => {
-    <CartItem item={data.item} onDelete={handleDelete}/>
+    console.log (data);
+    return(
+    <CartItem item={data.item} onDelete={handleDelete}/>)
 }
-
 const CartScreen = () => {
-    
     const dispatch = useDispatch();
-    const {cart} = useSelector(state => state.cart.value)
+    
+   
+   
+    const {cart} = useSelector(state => state.cart.value);
+    console.log(cart);
     const handleConfirm = () => {
         dispatch(confirmPurchase(cart))
     };
@@ -54,6 +57,7 @@ const styles = StyleSheet.create({
     },
     list: {
         flex: 1,
+        backgroundColor:'black'
     },
     footer: {
         padding: 12,

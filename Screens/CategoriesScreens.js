@@ -4,23 +4,23 @@ import Header from '../Components/Header';
 import Searcher from '../Components/Searcher';
 import { colors } from '../Styles/colors';
 import List from '../Components/List';
-import {CATEGORIES} from '../Data/Categories';
+import {CATEGORY} from '../Data/CategoriesData';
 import { Entypo } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProductsByCategory } from '../features/products';
-import { selectedCategory } from '../features/categories';
+import { setProductsByCategory } from '../Features/Products';
+import { selectedCategory } from '../Features/Categories';
 
 const CategoriesScreen = ({navigation}) => {
 
     const [input, setInput] = useState("")
-    const [categoriesFilter, setCategoriesFilter] = useState(CATEGORIES)
+    const [categoriesFilter, setCategoriesFilter] = useState(CATEGORY)
     const dispatch = useDispatch();
     const {categories} = useSelector(state => state.categories.value)
     
      
 
     useEffect(()=> {
-        if (input === "") setCategoriesFilter(CATEGORIES)
+        if (input === "") setCategoriesFilter(CATEGORY)
         else {
             const categoriasFiltradas = categories.filter(category => category.category.toLowerCase().includes(input.toLowerCase()))
             setCategoriesFilter(categoriasFiltradas)
