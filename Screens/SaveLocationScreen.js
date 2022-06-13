@@ -3,6 +3,7 @@ import React from 'react';
 import {useDispatch} from 'react-redux';
 import { addLocation } from '../Features/Locations';
 import * as ImagePicker from 'expo-image-picker';
+import renamePathAndMove from '../Utils/renamePath';
 
 const SaveLocationScreen = () => {
     const [title, setTitle] = React.useState("");
@@ -26,6 +27,7 @@ const handleTakePicture = async () => {
         aspect: [4,3],
         quality: 1,
     })
+    console.log(image);
     setPicture(image.uri);
 }
 
@@ -43,9 +45,11 @@ const handleTakePicture = async () => {
             setPicture(result.uri);
         }
     }
-    const handleConfirm = () => {
-        dispatch(addLocation(title));
+    const handleConfirm = async () => {
+        const path = await renamePathAndMove(picture);
+        dispatch(addLocation({title, picture, id: Date.now()}));
         setTitle("");
+        setPicture("");
     }
   return (
     <View style={styles.container}> 

@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     value: {
-        locations: []
+        location: []
     }
 }
 const locationSlice = createSlice({
@@ -10,7 +10,7 @@ const locationSlice = createSlice({
     initialState,
     reducers: {
         addLocation: (state, {payload}) => {
-            state.value.locations.push(payload)
+            state.value.location.push(payload)
         }
     },
     extraReducers: {
