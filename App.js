@@ -5,20 +5,17 @@ import MainNavigator from './Navigation';
 import { Provider } from 'react-redux';
 import store from './Store';
 
+import { init } from './db';
 
+init()
+.then(()=> {console.log('Db initialized');})
+.catch((err)=> {
+  console.log('Error loading db');
+  console.log(err.message);
+}) 
 
 export default function App() {
 
-/*   const [categorySelected, setCategorySelected] = useState(null);
-  const [productSelected, setProductSelected] = useState(null);
-  const handleCategory = (category) => {
-    // console.log(category);
-    setCategorySelected(category)
-  }
-  const handleProduct = (product) => {
-    // console.log(category);
-    setProductSelected(product)
-  } */
   const [loaded] = useFonts({
     Karla: require('./assets/Fonts/static/Karla-Regular.ttf')
   });
