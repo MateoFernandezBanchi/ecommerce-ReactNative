@@ -1,4 +1,4 @@
-import Joi from 'joi'
+import Joi from 'joi';
 
 export const schemaEmail = Joi.object({
     email: Joi.string()
@@ -14,7 +14,7 @@ export const schemaPassword = Joi.object({
     password: Joi.string()
         .empty()
         .min(6)
-        .max(100)
+        .max(40)
         .alphanum()
         .messages({
             "string.empty": "Campo obligatorio",

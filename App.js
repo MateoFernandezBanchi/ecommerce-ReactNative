@@ -4,15 +4,14 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import MainNavigator from './Navigation';
 import { Provider } from 'react-redux';
 import store from './Store';
-
 import { init } from './db';
-
-init()
-.then(()=> {console.log('Db initialized');})
-.catch((err)=> {
-  console.log('Error loading db');
-  console.log(err.message);
-}) 
+import { registerRootComponent } from 'expo';
+// init()
+// .then(()=> {console.log('Db initialized');})
+// .catch((err)=> {
+//   console.log('Error loading db');
+//   console.log(err.message);
+// }) 
 
 export default function App() {
 
@@ -34,3 +33,4 @@ export default function App() {
     //</SafeAreaProvider>
   );
 }
+registerRootComponent(App);

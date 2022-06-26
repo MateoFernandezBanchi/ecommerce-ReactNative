@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text } from 'react-native'
-import React from 'react';
+import React, {useState} from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ShopNavigator from '../../Stacks/Shop';
 import { Entypo, Feather } from '@expo/vector-icons';
@@ -12,6 +12,7 @@ import LocationStack from '../../Stacks/Locations';
 const BottomTabs = createBottomTabNavigator()
 
 const TabNavigatorLogged = () => {
+
     return (
         <BottomTabs.Navigator
             screenOptions={{
@@ -72,6 +73,7 @@ const TabNavigatorLogged = () => {
                         )
                     }
                 }}
+                
             />
         </BottomTabs.Navigator>
     )

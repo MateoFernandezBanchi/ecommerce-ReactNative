@@ -10,6 +10,9 @@ const Header = ({title = "Tienda de Bebidas"}) => {
     <View style={styles.container} >
       <Text style={styles.text}>{title}</Text>
     </View>
+    <View>
+      <Text>Logout</Text>
+    </View> 
     </SafeAreaView>
   )
 }

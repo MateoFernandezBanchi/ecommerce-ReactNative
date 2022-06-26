@@ -1,22 +1,40 @@
-import { StyleSheet, Text, View } from 'react-native'
-import React, { useState } from 'react'
-import { colors } from '../Styles/colors'
-import Input from '../Components/Input'
+import { StyleSheet, Text, View, Button } from 'react-native';
+import React, { useState } from 'react';
+import { colors } from '../Styles/colors';
+import Input from '../Components/Input';
+import {useDispatch} from "react-redux";
+import { signIn } from '../Features/Auth';
+import { schemaEmail, schemaPassword } from '../Utils/validateSchemas';
+import { TouchableOpacity } from 'react-native';
 
-const LoginScreen = () => {
+const LoginScreen = ({navigation}) => {
 
-    const [registroVista, setRegistroVista] = useState(false);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
+    const [emailError, setEmailError] = useState("");
+    const [passwordError, setPasswordError] = useState("");
+    const dispatch = useDispatch() 
 
+    const handleSignIn = () => {
+        dispatch(signIn({email:email, password:password}))
+    };
+    const handleLogin = () => {
+        navigation.goBack(); 
+    }
     return (
         <View style={styles.container}>
-            <View style={styles.content}>
-                <Text style={styles.title}>{registroVista ? "Registro": "Login"}</Text>
-                <Input label="Email" password={false} onChange={setEmail} value= {email}/>
-                <Input label="Password" password={true} onChange={setPassword} value= {password}/>
-                <Input label="Confirm Password" password={true} onChange={setConfirmPassword} value= {confirmPassword}/>
+            <View style={styles.content}>    
+                <Text style={styles.title}>Login</Text>  
+                <Input label="Email" password={false} onChange={setEmail} value= {email} error={emailError}/>
+                <Input label="Password" password={true} onChange={setPassword} value= {password} error={passwordError}/>
+                <Button title="SignIn" onPress={handleSignIn}/>
+                
+                <Text style={styles.logged}>No posees cuenta?  
+                    <TouchableOpacity onPress={handleLogin}> 
+                        <Text style={styles.loggedYes}>Registrate!</Text> 
+                    </TouchableOpacity> 
+                </Text> 
+                  
             </View>
         </View>
     )
@@ -53,6 +71,16 @@ const styles = StyleSheet.create({
         marginBottom:10,
         fontWeight: 'bold',
         color: colors.colorPrimary
+    },
+    logged: {
+        color: 'white',
+        textAlign: 'center',
+        fontSize:18,
+        marginVertical:15
+    },
+    loggedYes: {
+        color: 'blue',
+        paddingHorizontal:5,
     }
     
 

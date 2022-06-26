@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TextInput } from 'react-native'
 import React from 'react'
 import { colors } from '../Styles/colors'
 
-const Input = ({label, password=false, onChange, value}) => {
+const Input = ({label, password=false, onChange, value, error = null}) => {
   return (
     <View>
       <Text style={styles.text}>{label}</Text>
@@ -12,12 +12,15 @@ const Input = ({label, password=false, onChange, value}) => {
       secureTextEntry={password}
       value={value}
       />
+      
+     {error ? <Text style={styles.error}>{error}</Text> : null}
+     
     </View>
   )
 }
 
 export default Input
-
+ 
 const styles = StyleSheet.create({
   Input: {
     width: '100%',
@@ -37,5 +40,12 @@ const styles = StyleSheet.create({
       fontSize:20,
       fontFamily:'Karla'
 
+  },
+  error: {
+    color:'red',
+    textAlign:'center',
+    fontSize:14,
+    fontFamily:'Karla',
+    marginBottom: 6,
   }
 })

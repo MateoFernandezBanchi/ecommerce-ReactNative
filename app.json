@@ -21,26 +21,15 @@
       "supportsTablet": true
     },
     "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      },
-      "package": "com.mateofernandezbanchi.reactNativeBebidas"
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    },
-    "package": "com.coderhouse.ecommerce",
+      "package": "com.mateofernandezbanchi.reactNativeBebidas",
       "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
-      },
-      "permissions": [
-        "CAMERA",
-        "ACCESS_FINE_LOCATION",
-        "WRITE_EXTERNAL_STORAGE"
-      ]
-
+      }
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    }
   }
 }
