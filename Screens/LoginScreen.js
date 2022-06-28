@@ -4,7 +4,6 @@ import { colors } from '../Styles/colors';
 import Input from '../Components/Input';
 import {useDispatch} from "react-redux";
 import { signIn } from '../Features/Auth';
-import { schemaEmail, schemaPassword } from '../Utils/validateSchemas';
 import { TouchableOpacity } from 'react-native';
 
 const LoginScreen = ({navigation}) => {

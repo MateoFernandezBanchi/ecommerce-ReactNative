@@ -4,7 +4,6 @@ import { colors } from '../Styles/colors';
 import Input from '../Components/Input';
 import {useDispatch} from "react-redux";
 import { signUp } from '../Features/Auth';
-import { schemaEmail, schemaPassword } from '../Utils/validateSchemas';
 import { TouchableOpacity } from 'react-native';
 import {Formik} from 'formik';
 import loginValidationSchema from '../Utils/validationYup'
