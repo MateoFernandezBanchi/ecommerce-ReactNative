@@ -7,22 +7,33 @@ import CartStack from '../../Stacks/Cart';
 import { colors } from '../../../Styles/colors';
 import OrdersStack from '../../Stacks/Orders';
 import LocationStack from '../../Stacks/Locations';
-
+import { signIn } from '../../../Features/Auth';
+import { useDispatch } from 'react-redux';
 
 const BottomTabs = createBottomTabNavigator()
 
 const TabNavigatorLogged = () => {
-
+    const dispatch = useDispatch()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const handleLogout = () => {
+      setEmail("");
+      setPassword("");
+      console.log(email);
+      dispatch(signIn({email:email, password:password}))
+    }
     return (
         <BottomTabs.Navigator
             screenOptions={{
                 headerShown: false,
                 tabBarShowLabel: false,
                 tabBarStyle: styles.tabBar
-            }}>
+            }}
+            >
             <BottomTabs.Screen
                 name="ShopTab"
                 component={ShopNavigator}
+                handleLogout={handleLogout}
                 options={{
                     tabBarIcon: ({ focused }) => {
                         return (
@@ -63,6 +74,7 @@ const TabNavigatorLogged = () => {
             <BottomTabs.Screen
                 name="LocationTab"
                 component={LocationStack}
+                handleLogout={handleLogout}
                 options={{
                     tabBarIcon: ({ focused }) => {
                         return (

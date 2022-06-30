@@ -1,29 +1,43 @@
 import { StyleSheet, Text, View, FlatList, TouchableOpacity } from 'react-native';
 import React from 'react';
 import { colors } from '../Styles/colors';
-// import { PRODUCTSELECTED } from '../Data/ProductSelected'
 import CartItem from '../Components/CartItem';
 import { useSelector, useDispatch } from 'react-redux';
-import { confirmPurchase } from '../Features/Cart';
+import { confirmPurchase, removeItem, removeCart } from '../Features/Cart';
 
-const handleDelete = (id) => console.log ('se elimina del carrito el producto con id: ${id}');
-const renderItem = (data) => {
-    console.log (data);
-    return(
-    <CartItem item={data.item} onDelete={handleDelete}/>)
-}
+
 const CartScreen = () => {
     const dispatch = useDispatch();
     
    
    
     const {cart} = useSelector(state => state.cart.value);
-    console.log(cart);
-    const handleConfirm = () => {
+    const cartArray = useSelector(state => state.cart.value.cart);
+
+    const  handleConfirm =  () => {
+        dispatch(removeCart());
         dispatch(confirmPurchase(cart))
     };
-    const total = 12000; 
-
+    const handleDelete = (id) => {
+        dispatch(removeItem({id:id}));
+    };
+    const renderItem = (data) => {
+        console.log (data);
+        return(
+        <CartItem item={data.item} onDelete={handleDelete}/>)
+    }
+    const subTotalArray1 = cartArray.filter (item => item.quantity > 1);
+    const subTotalArray2 = cartArray.filter (item => item.quantity == 1);
+    let total = 0; 
+    let subTotal1 = 0;
+    let subTotal2 = 0;
+    if (subTotalArray1) {
+        subTotalArray1.forEach(item => { subTotal1 += item.price * item.quantity; });
+        subTotalArray2.forEach((product)=> {subTotal2 += product.price});
+        total = subTotal1 + subTotal2;
+    } else {
+        cartArray.forEach((product)=> {total += product.price}); 
+    }
   return (
     <View style={styles.container}>
        <View style={styles.list}>
@@ -61,11 +75,11 @@ const styles = StyleSheet.create({
     },
     footer: {
         padding: 12,
-        borderTopColor: colors.beige,
+        borderTopColor: colors.colorPrimary,
         borderTopWidth: 1,
     },
     confirm: {
-        backgroundColor: colors.beige,
+        backgroundColor: colors.colorPrimary,
         borderRadius: 10,
         padding: 10,
         flexDirection: 'row',

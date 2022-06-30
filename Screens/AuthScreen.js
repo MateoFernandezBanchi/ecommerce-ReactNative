@@ -10,56 +10,23 @@ import loginValidationSchema from '../Utils/validationYup'
 
 const AuthScreen = ({navigation}) => {
 
-    const [registroVista, setRegistroVista] = useState(false);
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-    // const [confirmPassword, setConfirmPassword] = useState("");
-    // const [emailError, setEmailError] = useState("");
     const [passwordError, setPasswordError] = useState("");
     const dispatch = useDispatch() 
 
-    // const handleSignUp = () => {
-
-        // const validateEmail = schemaEmail.validate({email:email})
-        // console.log(validateEmail)
-        // const validatePassword = schemaPassword.validate({password:password})
-        
-        // if (validateEmail.error) setEmailError(validateEmail.error.message)
-        // else setEmailError('')
-        // if (validatePassword.error) setPasswordError(validatePassword.error.message)
-        // else setPasswordError('')
-        // if (password === confirmPassword) {
-        //     dispatch(signUp({email:email, password:password}))
-        //  } else {
-        //     setPasswordError('las contraseñas deben coincidir')
-        //  }
-    //     setEmailError("");
-    //     setPasswordError("");
-    //     if (password === confirmPassword) {
-    //         dispatch(signUp({email:email, password:password}))
-    //      } else {
-    //         setPasswordError('las contraseñas deben coincidir')
-    //      }
-
-    // };
     const handleLogin = () => {
          navigation.push('Login') 
     }
     const handleSubmit = (values) => {
         console.log(values);
         console.log("Se submiteo un form válido");
-        if (registroVista) {
+
             if (values.password === values.confirmPassword) {
                 console.log("Se registra!");
-                dispatch(signUp({ email: values.email, password: values.password }))
+                dispatch(signUp({ email: values.email, password: values.password }));
             } else {
-                setPasswordError("Los passwords deben coincidir")
+                setPasswordError("Los passwords deben coincidir");
             }
-        }
-        else {
-            console.log("Entra al login");
-            dispatch(login({ email: values.email, password: values.password }));
-        }
+        
     }
     return (
         <View style={styles.container}>

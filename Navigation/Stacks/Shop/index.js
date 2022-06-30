@@ -6,10 +6,12 @@ import CategoriesScreen from '../../../Screens/CategoriesScreens';
 import ProductsScreen from '../../../Screens/ProductsScreens';
 import DetailScreens from '../../../Screens/DetailScreens';
 import { colors } from '../../../Styles/colors';
+import { TouchableOpacity, Text } from 'react-native';
+import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
 const Stack = createNativeStackNavigator();
 
-const ShopNavigator = () => {
+const ShopNavigator = ({handleLogout}) => {
   return (
 
     <Stack.Navigator initialRouteName='Categories' 
@@ -27,8 +29,17 @@ const ShopNavigator = () => {
         name="Categories" 
         component={CategoriesScreen} 
         options={{
-          title:"Categorias"  
-        } } />
+          title:"Categorias",
+          headerLeft: () => {
+            return (
+                <TouchableOpacity onPress={handleLogout}>
+                    <FontAwesome5 name="user-alt" size={24} color="black" />
+                    <Text>Logout</Text>
+                </TouchableOpacity>
+            )
+        }  
+        } }
+         />
       <Stack.Screen 
         name="Products" 
         component={ProductsScreen}

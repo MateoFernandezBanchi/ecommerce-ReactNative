@@ -9,6 +9,7 @@ import { Entypo } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { setProductsByCategory } from '../Features/Products';
 import { selectedCategory } from '../Features/Categories';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const CategoriesScreen = ({navigation}) => {
 
@@ -32,7 +33,6 @@ const CategoriesScreen = ({navigation}) => {
     }
 
      const handleSelectedCategory = (category) => {
-         // handleCategory(category)
          dispatch (setProductsByCategory(category.id));
          dispatch (selectedCategory(category.id));
 
@@ -45,9 +45,9 @@ const CategoriesScreen = ({navigation}) => {
     return (
         <>
             {/* <Header color="#FAC179" /> */}
-      
+
             <View style={styles.container}>
-                <Searcher additionalStyles={{
+            <Searcher additionalStyles={{
                     backgroundColor: colors.colorPrimary
                 }}>
                     <TextInput
@@ -58,14 +58,15 @@ const CategoriesScreen = ({navigation}) => {
                         placeholder={'Busque por categoria'}
                     />
                     <TouchableOpacity onPress={handleErase}>
-                        <Entypo name="erase" size={30} color="black" />
+                        <Entypo name="erase" size={25} color="black" />
                     </TouchableOpacity>
                 </Searcher>
                 <View style={styles.listContainer}>
                     <List data={categoriesFilter} onPress={handleSelectedCategory}/>
                 </View>
+               
             </View>
-           
+
         </>
     )
 }
@@ -75,17 +76,19 @@ export default CategoriesScreen
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        width: '100%',
+        marginBottom:100,
+        width: 'auto',
         alignItems: 'center',
         flexDirection: 'column',
+        justifyContent: 'center',
     },
     input: {
         width: '80%',
         padding: 10,
         margin: 10,
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         borderRadius: 10,
-        color: 'white',
+        color: 'black',
         height: 50,
     },
     listContainer:{

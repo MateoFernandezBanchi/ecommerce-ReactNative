@@ -13,6 +13,7 @@ const initialState = {
 export const confirmPurchase = createAsyncThunk(
     'cart/confirm',
     async (items, asyncThunk) => {
+        try {
         const res = await fetch(
             `${DB_URL}orders.json`, {
             method: 'POST',
@@ -23,7 +24,9 @@ export const confirmPurchase = createAsyncThunk(
         }
         )
         const data = res.json();
-        return data;
+        return data;} catch (error) {
+            return rejectWithValue('Opps there seems to be an error');
+        }
     }
 )
 const cartSlice = createSlice({
@@ -40,11 +43,15 @@ const cartSlice = createSlice({
             } else {
                 const product = PRODUCTS.find(product => product.id === action.payload.id);
                 console.log(product)
-                // const product = store.getState().products.value.products.find(product => product.id === action.payload);
                 state.value.cart.push({ ...product, quantity: 1 });
             }
         },
-        removeItem: () => { },
+        removeItem: (state, action) => { 
+            state.value.cart = state.value.cart.filter(item => item.id !== action.payload.id);
+        },
+        removeCart: (state) => {
+            state.value.cart = [];
+        }
 
     },
     extraReducers: {
@@ -52,7 +59,8 @@ const cartSlice = createSlice({
             state.value.loading = true;
         },
         [confirmPurchase.fulfilled]: (state, { payload }) => {
-            state.value.response = payloadstate.loading = false;
+            state.value.response = payload;
+            state.value.loading = false;
         },
         [confirmPurchase.rejected]: (state) => {
             state.value.loading = false;
@@ -61,5 +69,5 @@ const cartSlice = createSlice({
     }
 });
 
-export const { addItem, removeItem } = cartSlice.actions;
+export const { addItem, removeItem, removeCart } = cartSlice.actions;
 export default cartSlice.reducer;

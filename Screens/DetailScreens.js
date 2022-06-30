@@ -1,32 +1,14 @@
 import { StyleSheet, Text, View, Image, Dimensions, TouchableOpacity, useWindowDimensions, Button } from 'react-native'
-import React, { useEffect, useState } from 'react'
-import { PRODUCTS } from '../Data/ProductsData'
+import React, {useState } from 'react'
 import { addItem } from '../Features/Cart';
 import { useDispatch, useSelector } from 'react-redux';
 
 
-const DetailScreen = ({ route, navigation
-}) => {
+const DetailScreen = () => {
     const dispatch = useDispatch();
-    // const {productId} = route.params;
     const { height, width } = useWindowDimensions();
     const [orientation, setOrientation] = useState("portrait");
-    // const [product, setProduct] = useState({});
     const {productSelected} = useSelector(state => state.products.value)
-    console.log(productSelected);
-
-    // useEffect(() => {
-    //     setOrientation(height > width ? "portrait" : "landscape")
-    // }, [height, width])
-    
-    const handleBack = () => {
-        navigation.goBack();
-    }
-
-    // useEffect(() => {
-    //     const productSelected = PRODUCTS.find(product => product.id === productId)
-    //     setProduct(productSelected)
-    // }, [productId])
 
     const handleAdd = (id) => {
         dispatch(addItem({id: id}))
@@ -42,12 +24,11 @@ const DetailScreen = ({ route, navigation
                     style={styles.image}
                     resizeMode="cover"
                 />
-                <Text>{productSelected.description}</Text>
-                <Text>$ {productSelected.price}</Text>
-                <TouchableOpacity style={styles.button} onPress={handleBack}>
-                        <Text style={styles.button}>Volver</Text>
+                <Text style={styles.text}>{productSelected.description}</Text>
+                <Text style={styles.price}>$ {productSelected.price}</Text>
+                    <TouchableOpacity style={styles.button} onPress={()=>handleAdd(productSelected.id)}>
+                        <Text style={{color:'white'}}>Add to Cart</Text>
                     </TouchableOpacity>
-                    <Button title="Add to Cart" onPress={()=>handleAdd(productSelected.id)}/>
             </View>
             }
             </>
@@ -60,6 +41,7 @@ const styles = StyleSheet.create({
     containerVertical: {
         flex: 1,
         flexDirection: 'column',
+        alignItems: 'center',
     },
     containerHorizontal: {
         flex: 1,
@@ -71,12 +53,26 @@ const styles = StyleSheet.create({
         marginTop: 30,
     },
     button: {
-        width: 100,
-        height:30,
+        width: 150,
+        height:40,
         backgroundColor:'black',
-        borderRadius:30,
+        borderRadius:15,
         textAlign:'center',
         color: 'white',
-        paddingTop:3
+        paddingTop:2,
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    text: {
+        fontSize: 20,
+        marginVertical:10,
+        fontFamily: 'Karla',
+    },
+    price: {
+        fontWeight:'bold',
+        fontSize: 20,
+        marginVertical:10,
+        fontFamily: 'Karla',
     }
 })

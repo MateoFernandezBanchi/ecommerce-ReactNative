@@ -19,9 +19,10 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.colorSecondary,
     width:250,
-    height:250,
+    height:150,
     marginVertical:20,
     borderRadius:20,
+    overflow:'hidden',
     alignItems: 'center',
     shadowColor: "#000",
     shadowOffset: {
@@ -35,6 +36,7 @@ const styles = StyleSheet.create({
   image: {
     width: 190,
     height: 190,
+    borderRadius: 100
   },
   description: {
     color:'white',

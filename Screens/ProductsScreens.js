@@ -72,9 +72,6 @@ const ProductsScreen = ({navigation, route}) => {
                 </Searcher>
                 <View style={styles.listContainer}>
                     <List style={styles.listItems} data={productsFiltered} itemType ={"Producto"} onPress={handleDetailProduct}/>
-                    <TouchableOpacity style={styles.button} onPress={handleBack}>
-                        <Text style={styles.button}>Volver</Text>
-                    </TouchableOpacity>
                 </View>
             </View>
             
@@ -100,7 +97,7 @@ const styles = StyleSheet.create({
         width: '80%',
         padding: 10,
         margin: 10,
-        backgroundColor: 'black',
+        backgroundColor: 'white',
         borderRadius: 10,
         color: 'white',
         height: 50,
@@ -108,6 +105,7 @@ const styles = StyleSheet.create({
     listContainer:{
         flex: 1,
         alignItems: 'center',
+        marginBottom:150,
     },
     button: {
         width: 100,

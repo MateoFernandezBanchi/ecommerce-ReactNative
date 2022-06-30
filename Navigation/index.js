@@ -10,9 +10,10 @@ const MainNavigator = () => {
 
   return (
     <NavigationContainer>
-      {user.userId ? 
+       {user.userId ?   
         <TabNavigatorLogged/>
-        : <AuthStack/>}
+          : <AuthStack/>  
+       }
     </NavigationContainer>
   )
 }

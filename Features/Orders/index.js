@@ -1,3 +1,4 @@
+
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { DB_URL } from "../../Constants/firebase";
 
@@ -10,6 +11,7 @@ const initialState = {
 }
 
 export const getOrders = createAsyncThunk(
+    
     'orders/getOrders',
     async (_, asyncThunk) => {
         console.log(_);
@@ -28,7 +30,9 @@ export const getOrders = createAsyncThunk(
 export const ordersSlice = createSlice({
     name: "orders",
     initialState,
-    reducers: {},
+    reducers: {
+
+    },
     extraReducers: {
         [getOrders.pending]: (state) => {
             state.value.loading = true
@@ -44,4 +48,4 @@ export const ordersSlice = createSlice({
     }
 })
 
-export default ordersSlice.reducer
+export default ordersSlice.reducer;

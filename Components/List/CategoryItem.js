@@ -4,7 +4,7 @@ import { colors } from '../../Styles/colors';
 import { useWindowDimensions } from 'react-native';
 
 
-// const windowWidth = Dimensions.get('window').width;
+//  const windowWidth = Dimensions.get('window').width;
 // const windowHeight = Dimensions.get('window').height;
 
 const CategoryItem = ({category}) => {
@@ -13,8 +13,9 @@ const CategoryItem = ({category}) => {
 
   return (
     <View style={{...styles.container,
-    maxWidth: width * 0.4,
-    maxHeight: height * 0.25}}
+      maxWidth: width * 1,
+     maxHeight: height * 0.25
+  }}
     >
       <Text style={styles.text}>{category.category}</Text>
       <Image source={{uri:(category.image)}}style={styles.image} />
@@ -26,15 +27,16 @@ export default CategoryItem
 
 const styles = StyleSheet.create({
   container: {
-    // maxWidth: windowWidth * 0.4,
+    backgroundColor:"black",
     width: 150,
+    borderRadius:100,
     height: 150,
-    justifyContent: 'flex-end',
+    justifyContent: 'center',
     alignItems: 'center',
     padding: 15,
     backgroundColor:colors.colorSecondary,
-    margin: 15,
-    borderRadius: 10,
+    marginVertical: 15,
+    marginLeft:0,
     shadowOffset: {
       width: 4,
       height: 6,

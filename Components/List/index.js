@@ -18,7 +18,7 @@ const List = ({ itemType = "category", data, onPress}) => {
 
     return (
         <FlatList
-            numColumns={itemType === "category" ? 2: 1}
+            numColumns={itemType === "category" ? 1: 1}
             data={data}
             renderItem={fnRender}
             keyExtractor={item => item.id}
@@ -27,5 +27,3 @@ const List = ({ itemType = "category", data, onPress}) => {
 }
 
 export default List
-
-const styles = StyleSheet.create({})
