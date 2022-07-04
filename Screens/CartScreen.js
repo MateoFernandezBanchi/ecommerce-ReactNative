@@ -4,28 +4,14 @@ import { colors } from '../Styles/colors';
 import CartItem from '../Components/CartItem';
 import { useSelector, useDispatch } from 'react-redux';
 import { confirmPurchase, removeItem, removeCart } from '../Features/Cart';
+import {getOrders} from'../Features/Orders';
 
 
 const CartScreen = () => {
     const dispatch = useDispatch();
-    
-   
-   
+    const userId = useSelector(state => state.auth.value.user.userId);
     const {cart} = useSelector(state => state.cart.value);
     const cartArray = useSelector(state => state.cart.value.cart);
-
-    const  handleConfirm =  () => {
-        dispatch(removeCart());
-        dispatch(confirmPurchase(cart))
-    };
-    const handleDelete = (id) => {
-        dispatch(removeItem({id:id}));
-    };
-    const renderItem = (data) => {
-        console.log (data);
-        return(
-        <CartItem item={data.item} onDelete={handleDelete}/>)
-    }
     const subTotalArray1 = cartArray.filter (item => item.quantity > 1);
     const subTotalArray2 = cartArray.filter (item => item.quantity == 1);
     let total = 0; 
@@ -38,9 +24,27 @@ const CartScreen = () => {
     } else {
         cartArray.forEach((product)=> {total += product.price}); 
     }
+    console.log(userId);
+    const  handleConfirm =  () => {
+        dispatch(removeCart());
+        dispatch(confirmPurchase({userId:{userId}, items:cart, total:total}));
+        dispatch(getOrders());
+
+    };
+    const handleDelete = (id) => {
+        dispatch(removeItem({id:id}));
+    };
+    const renderItem = (data) => {
+        console.log (data);
+        return(
+        <CartItem item={data.item} onDelete={handleDelete}/>)
+    }
+    
   return (
     <View style={styles.container}>
-       <View style={styles.list}>
+        
+        {cart.length > 0 ?<> 
+        <View style={styles.list}>
            <FlatList 
               data={cart}
               keyExtractor ={item => item.id}
@@ -55,7 +59,10 @@ const CartScreen = () => {
                     <Text style={styles.text}>${total}</Text>
                 </View>
             </TouchableOpacity>
-        </View>
+        </View></>: 
+        <View style={styles.list}>
+            <Text style={styles.message}>No hay productos en el carrito</Text>
+        </View>}
     </View>
   )
 }
@@ -94,5 +101,12 @@ const styles = StyleSheet.create({
         fontFamily: 'Karla',
         padding: 8,
         color: 'black'
+    },
+    message: {    
+        color: 'white',
+        margin:40,
+        fontFamily: 'Karla',
+        fontSize: 18,
+        textAlign: 'center',
     }
 })

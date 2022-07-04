@@ -1,7 +1,6 @@
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native'
 import React from 'react'
 import { colors } from '../Styles/colors';
-import {Ionicons} from '@expo/vector-icons';
 import { Entypo } from '@expo/vector-icons';
 
 const CartItem = ({item, onDelete}) => {
@@ -15,6 +14,13 @@ const CartItem = ({item, onDelete}) => {
         <View>
           <Text style={styles.text}>Cantidad: {item.quantity}</Text>
           <Text style={styles.text}>${item.price}</Text>
+        </View>
+        <View>
+        <Image
+                    source={{ uri: item.image }}
+                    style={styles.image}
+                    resizeMode="cover"
+                />
         </View>
         <TouchableOpacity style={styles.trash} onPress={()=> onDelete(item.id)}>
         <Entypo styles={styles.trash} name="trash" size={24} color="white" />
@@ -54,5 +60,10 @@ const styles = StyleSheet.create({
     },
     trash: {
       color:'white',
+    },
+    image: {
+      width: 60,
+      height: 60,
+      borderRadius:100
     }
 })

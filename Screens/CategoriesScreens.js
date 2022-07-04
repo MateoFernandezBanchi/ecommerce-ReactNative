@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         marginBottom:100,
-        width: 'auto',
+        width: '100%',
         alignItems: 'center',
         flexDirection: 'column',
         justifyContent: 'center',
@@ -93,5 +93,7 @@ const styles = StyleSheet.create({
     },
     listContainer:{
         flex: 1,
+        width:'100%',
+        alignItems: 'center'
     }
 })

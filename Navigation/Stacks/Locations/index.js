@@ -10,8 +10,18 @@ import { signIn } from '../../../Features/Auth';
 import { useDispatch } from 'react-redux';
 
 const Stack = createNativeStackNavigator();
-const LocationStack = ({handleLogout}) => {
- console.log(handleLogout);
+
+const LocationStack = () => {
+  const dispatch = useDispatch()
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const handleLogout = () => {
+    setEmail("");
+    setPassword("");
+    console.log(email);
+    dispatch(signIn({email:email, password:password}))
+  }
+
   return (
     <Stack.Navigator initialRouteName='' 
     screenOptions={{

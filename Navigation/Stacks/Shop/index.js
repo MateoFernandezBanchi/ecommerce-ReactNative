@@ -8,10 +8,22 @@ import DetailScreens from '../../../Screens/DetailScreens';
 import { colors } from '../../../Styles/colors';
 import { TouchableOpacity, Text } from 'react-native';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
+import { useDispatch } from 'react-redux';
+import { useState } from 'react';
+import { signIn } from '../../../Features/Auth';
 
 const Stack = createNativeStackNavigator();
 
-const ShopNavigator = ({handleLogout}) => {
+const ShopNavigator = () => {
+  const dispatch = useDispatch()
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const handleLogout = () => {
+      setEmail("");
+      setPassword("");
+      console.log(email);
+      dispatch(signIn({email:email, password:password}))
+    }
   return (
 
     <Stack.Navigator initialRouteName='Categories' 

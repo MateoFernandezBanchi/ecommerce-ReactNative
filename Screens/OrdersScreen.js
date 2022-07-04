@@ -1,8 +1,9 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native'
+import { FlatList, StyleSheet, View } from 'react-native'
 import React, {useEffect} from 'react';
-import OrderItem from '../Components/OrderItem'
-import { useDispatch, useSelector } from 'react-redux';
-import { getOrders } from '../Features/Orders'
+import OrderItem from '../Components/OrderItem';
+import { useSelector, useDispatch } from 'react-redux';
+import { getOrders } from '../Features/Orders';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 const renderItem = ({item}) => (
     <OrderItem 
@@ -11,29 +12,37 @@ const renderItem = ({item}) => (
 )
 
 const OrdersScreen = () => {
-    const {orders} = useSelector(state => state.orders.value)
-    console.log(orders);
     const dispatch = useDispatch();
-    useEffect(() => {
-      dispatch(getOrders({id:1, elemento:"vino elemento"}));
-    },[])
-    
+    const userId = useSelector(state => state.auth.value.user.userId);
+    const orders = useSelector(state => state.orders.value.orders);
+    const orderSelected = orders.filter(order => userId === order.userId.userId);
+
+     useEffect(() => {
+        dispatch(getOrders());
+     }, []);
+
+  
+    console.log(orderSelected);
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
+    <View >
         <FlatList 
-            data={orders}
-            keyExtractor = {item => item.items.id}
+            data={orderSelected}
+            keyExtractor = {item => item.id}
             renderItem ={renderItem}
-        /> 
-        
+        />     
     </View>
+</SafeAreaView>
   )
 }
-
 export default OrdersScreen
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1
-    }
+        flex: 1,
+        alignItems: 'center',
+        marginVertical:10,
+        marginBottom:150
+    },
+
 })

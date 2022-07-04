@@ -78,7 +78,7 @@ const styles = StyleSheet.create({
         marginVertical:15
     },
     loggedYes: {
-        color: 'blue',
+        color: colors.lightBlue,
         paddingHorizontal:5,
     }
     

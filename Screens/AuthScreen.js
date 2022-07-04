@@ -43,8 +43,8 @@ const AuthScreen = ({navigation}) => {
                     <>
                 <Input label="Email" password={false} onChange={handleChange('email')} value= {values.email} onBlur={handleBlur('email')}/>
                 <Input label="Password" password={true} onChange={handleChange('password')} value={values.password} error={errors.password} onBlur={handleBlur('password')}/>
-                {registroVista? null :
-                <Input label="Confirm Password" password={true} onChange={handleChange('confirmPassword')} value={values.confirmPassword} onBlur={handleBlur('confirmPassword')} error={passwordError}/>}
+               
+                <Input label="Confirm Password" password={true} onChange={handleChange('confirmPassword')} value={values.confirmPassword} onBlur={handleBlur('confirmPassword')} error={passwordError}/>
                 <Button title="Signup" onPress={handleSubmit}/>
                 
                 <Text style={styles.logged}>ya posees cuenta?  
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
         marginVertical:15
     },
     loggedYes: {
-        color: 'blue',
+        color: colors.lightBlue,
         paddingHorizontal:5,
     }
     
