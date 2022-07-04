@@ -8,12 +8,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { setProductSelected } from '../Features/Products';
 
 const ProductsScreen = ({navigation, route}) => {
-    // const {products} = useSelector(state => state.products.value);
     const [input, setInput] = useState("");
     const [productsFiltered, setProductsFiltered] = useState([]);
     const {productsByCategory} = useSelector(state => state.products.value);
     const dispatch = useDispatch();
-    const {categoryId} = route.params;
 
     const handleErase = () => {
         setInput("")
@@ -27,16 +25,9 @@ const ProductsScreen = ({navigation, route}) => {
             }
         }
     }, [input, productsByCategory])
-
-    // useEffect(()=>{
-    //     const productosIniciales = products.filter(product => product.category === categoryId)
-    //     setInitialProducts(productosIniciales);
-    // }, [categoryId])
-
     const handleDetailProduct = (product) => {
         console.log(product);
         dispatch(setProductSelected(product.id))
-        // dispatch(setProductsFiltered(product.id));
         navigation.push("Detail", {
             productId: product.id,
             productTitle: product.description,
@@ -48,11 +39,10 @@ const ProductsScreen = ({navigation, route}) => {
     return (
         <>
         <KeyboardAvoidingView
-        //  behavior={Platform.OS === "ios" ? "padding" : "height"}
+         behavior={Platform.OS === "ios" ? "padding" : "height"}
          style={styles.keyboardAvoid}
          keyboardVerticalOffset={10}
        >
-            {/* <Header title={category.category}/> */}
              <TouchableWithoutFeedback onPress={Keyboard.dismiss}> 
     
             <View style={styles.container}>

@@ -12,6 +12,7 @@ const Input = ({label='busque producto', password=false, onChange, value, error 
       secureTextEntry={password}
       value={value}
       placeholder={label}
+      placeholderTextColor='white'
       />
       
      {error ? <Text style={styles.error}>{error}</Text> : null}
@@ -31,8 +32,9 @@ const styles = StyleSheet.create({
     padding:20,
     borderRadius:5,
     borderBottomColor: 'white',
-    borderBottomWidth: 4,
-
+    borderBottomWidth: 2,
+    color:'black',
+    fontSize:18,
   },
   text: {
       color:'white',

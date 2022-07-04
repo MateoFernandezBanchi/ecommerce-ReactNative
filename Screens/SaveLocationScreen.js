@@ -1,13 +1,13 @@
 import { StyleSheet, Text, View, TouchableOpacity, TextInput, ImagePickerIOS, Image } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import { addLocation } from '../Features/Locations';
 import * as ImagePicker from 'expo-image-picker';
 import renamePathAndMove from '../Utils/renamePath';
 
 const SaveLocationScreen = () => {
-    const [title, setTitle] = React.useState("");
-    const [picture, setPicture] = React.useState("");
+    const [title, setTitle] = useState("");
+    const [picture, setPicture] = useState("");
     const dispatch = useDispatch();
 
     const getPermission = async () => {

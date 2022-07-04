@@ -31,7 +31,7 @@ const AuthScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.content}>    
-                <Text style={styles.title}> Signup</Text>
+                <Text style={styles.title}> Registrarse </Text>
                 <Formik 
                     onSubmit={handleSubmit}
                     initialValues={{email: "", password: "", confirmPassword: ""}}
@@ -42,10 +42,10 @@ const AuthScreen = ({navigation}) => {
                 {({handleChange, errors, handleSubmit, values, handleBlur}) => (  
                     <>
                 <Input label="Email" password={false} onChange={handleChange('email')} value= {values.email} onBlur={handleBlur('email')}/>
-                <Input label="Password" password={true} onChange={handleChange('password')} value={values.password} error={errors.password} onBlur={handleBlur('password')}/>
+                <Input label="Contraseña" password={true} onChange={handleChange('password')} value={values.password} error={errors.password} onBlur={handleBlur('password')}/>
                
-                <Input label="Confirm Password" password={true} onChange={handleChange('confirmPassword')} value={values.confirmPassword} onBlur={handleBlur('confirmPassword')} error={passwordError}/>
-                <Button title="Signup" onPress={handleSubmit}/>
+                <Input label="Confirmar Contraseña" password={true} onChange={handleChange('confirmPassword')} value={values.confirmPassword} onBlur={handleBlur('confirmPassword')} error={passwordError}/>
+                <Button title="Registrarse" onPress={handleSubmit}/>
                 
                 <Text style={styles.logged}>ya posees cuenta?  
                     <TouchableOpacity onPress={handleLogin}> 

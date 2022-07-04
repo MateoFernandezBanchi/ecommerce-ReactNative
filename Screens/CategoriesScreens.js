@@ -1,6 +1,5 @@
 import { StyleSheet, TextInput, TouchableOpacity, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import Header from '../Components/Header';
 import Searcher from '../Components/Searcher';
 import { colors } from '../Styles/colors';
 import List from '../Components/List';
@@ -44,8 +43,6 @@ const CategoriesScreen = ({navigation}) => {
 
     return (
         <>
-            {/* <Header color="#FAC179" /> */}
-
             <View style={styles.container}>
             <Searcher additionalStyles={{
                     backgroundColor: colors.colorPrimary

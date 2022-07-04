@@ -1,5 +1,5 @@
 import { StyleSheet, View, Text } from 'react-native'
-import React, {useState} from 'react';
+import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import ShopNavigator from '../../Stacks/Shop';
 import { Entypo, Feather } from '@expo/vector-icons';
@@ -7,21 +7,11 @@ import CartStack from '../../Stacks/Cart';
 import { colors } from '../../../Styles/colors';
 import OrdersStack from '../../Stacks/Orders';
 import LocationStack from '../../Stacks/Locations';
-import { signIn } from '../../../Features/Auth';
-import { useDispatch } from 'react-redux';
 
 const BottomTabs = createBottomTabNavigator()
 
 const TabNavigatorLogged = () => {
-    const dispatch = useDispatch()
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const handleLogout = () => {
-      setEmail("");
-      setPassword("");
-      console.log(email);
-      dispatch(signIn({email:email, password:password}))
-    }
+    
     return (
         <BottomTabs.Navigator
             screenOptions={{
@@ -33,7 +23,6 @@ const TabNavigatorLogged = () => {
             <BottomTabs.Screen
                 name="ShopTab"
                 component={ShopNavigator}
-                handleLogout={handleLogout}
                 options={{
                     tabBarIcon: ({ focused }) => {
                         return (
@@ -74,7 +63,6 @@ const TabNavigatorLogged = () => {
             <BottomTabs.Screen
                 name="LocationTab"
                 component={LocationStack}
-                handleLogout={handleLogout}
                 options={{
                     tabBarIcon: ({ focused }) => {
                         return (

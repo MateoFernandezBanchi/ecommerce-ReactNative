@@ -5,17 +5,15 @@ import Input from '../Components/Input';
 import {useDispatch} from "react-redux";
 import { signIn } from '../Features/Auth';
 import { TouchableOpacity } from 'react-native';
+import {Formik} from 'formik';
+import loginValidationSchema from '../Utils/validationYup';
 
 const LoginScreen = ({navigation}) => {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const [emailError, setEmailError] = useState("");
-    const [passwordError, setPasswordError] = useState("");
     const dispatch = useDispatch() 
 
-    const handleSignIn = () => {
-        dispatch(signIn({email:email, password:password}))
+    const handleSubmit= (values) => {
+        dispatch(signIn({email:values.email, password:values.password}))
     };
     const handleLogin = () => {
         navigation.goBack(); 
@@ -23,17 +21,28 @@ const LoginScreen = ({navigation}) => {
     return (
         <View style={styles.container}>
             <View style={styles.content}>    
-                <Text style={styles.title}>Login</Text>  
-                <Input label="Email" password={false} onChange={setEmail} value= {email} error={emailError}/>
-                <Input label="Password" password={true} onChange={setPassword} value= {password} error={passwordError}/>
-                <Button title="SignIn" onPress={handleSignIn}/>
+                <Text style={styles.title}>Iniciar Sesion</Text>
+                <Formik 
+                    onSubmit={handleSubmit}
+                    initialValues={{email: "", password: "", confirmPassword: ""}}
+                    validationSchema = {loginValidationSchema}
+                    validateOnChange = {false}
+                    validateOnBlur = {false}
+                >   
+                {({handleChange, errors, handleSubmit, values, handleBlur}) => (  
+                    <>  
+                <Input label="Email" password={false} onChange={handleChange('email')} value= {values.email} onBlur={handleBlur('email')}/>
+                <Input label="Contraseña" password={true} onChange={handleChange('password')} value={values.password} error={errors.password} onBlur={handleBlur('password')}/>
+                <Button title="Iniciar Sesion" onPress={handleSubmit}/>
                 
                 <Text style={styles.logged}>No posees cuenta?  
                     <TouchableOpacity onPress={handleLogin}> 
                         <Text style={styles.loggedYes}>Registrate!</Text> 
                     </TouchableOpacity> 
                 </Text> 
-                  
+                </>
+                )}
+                </Formik>  
             </View>
         </View>
     )
