@@ -4,11 +4,12 @@ import {useDispatch} from 'react-redux';
 import { addLocation } from '../Features/Locations';
 import * as ImagePicker from 'expo-image-picker';
 import renamePathAndMove from '../Utils/renamePath';
-
-const SaveLocationScreen = () => {
+navigator
+const SaveLocationScreen = ({navigation, route}) => {
     const [title, setTitle] = useState("");
     const [picture, setPicture] = useState("");
     const dispatch = useDispatch();
+    const params = route.params;
 
     const getPermission = async () => {
         const {status} = await ImagePicker.getMediaLibraryPermissionsAsync()
@@ -47,9 +48,13 @@ const handleTakePicture = async () => {
     }
     const handleConfirm = async () => {
         const path = await renamePathAndMove(picture);
-        dispatch(addLocation({title, picture, id: Date.now()}));
+        dispatch(addLocation({title, picture, id: Date.now(), address:params?.address}));
         setTitle("");
         setPicture("");
+    }
+
+    const handleLocation = () => {
+        navigation.navigate("GetLocation");   
     }
   return (
     <View style={styles.container}> 
@@ -65,6 +70,7 @@ const handleTakePicture = async () => {
       : null }
       <TouchableOpacity style={styles.button} onPress={handleTakePicture}><Text style={styles.text}>Tomar una foto</Text></TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handlePickLibrary}><Text style={styles.text}>Seleccionar de la galeria</Text></TouchableOpacity>
+      <TouchableOpacity style={styles.button} onPress={handleLocation}><Text style={styles.text}>Obtener Ubicacion</Text></TouchableOpacity>
       <TouchableOpacity style={styles.button} onPress={handleConfirm}><Text style={styles.text}>Confirmar</Text></TouchableOpacity>
     </View>
   )

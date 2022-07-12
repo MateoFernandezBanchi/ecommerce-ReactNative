@@ -2,7 +2,7 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native'
 import React, {useState} from 'react'
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { colors } from '../../../Styles/colors';
-import CartScreen from '../../../Screens/CartScreen';
+import GetLocationScreen from '../../../Screens/GetLocationScreen';
 import LocationsScreen from '../../../Screens/LocationsScreen';
 import { Ionicons, FontAwesome5 } from '@expo/vector-icons';
 import SaveLocationScreen from '../../../Screens/SaveLocationScreen';
@@ -62,6 +62,13 @@ const LocationStack = () => {
       component={SaveLocationScreen} 
       options={{
         title: "Direcciones Guardadas",
+      }}>
+      </Stack.Screen>
+      <Stack.Screen 
+      name="GetLocation" 
+      component={GetLocationScreen} 
+      options={{
+        title: "Obtener ubicacion",
       }}>
       </Stack.Screen>
 

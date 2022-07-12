@@ -3,6 +3,7 @@ import React from 'react'
 import { colors } from '../Styles/colors'
 
 const PlaceItem = ({onSelect, title, image, address}) => {
+    console.log(image);
   return (
     <TouchableOpacity
         onPress={onSelect}
@@ -35,7 +36,7 @@ const styles = StyleSheet.create({
         width: 70,
         height: 70,
         borderRadius: 35,
-        backgroundColor: colors.colorPrimary
+        backgroundColor: 'grey'
     },
     info: {
         marginLeft: 25,

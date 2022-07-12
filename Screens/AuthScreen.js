@@ -41,7 +41,7 @@ const AuthScreen = ({navigation}) => {
                 >   
                 {({handleChange, errors, handleSubmit, values, handleBlur}) => (  
                     <>
-                <Input label="Email" password={false} onChange={handleChange('email')} value= {values.email} onBlur={handleBlur('email')}/>
+                <Input styles={styles.input} label="Email" password={false} onChange={handleChange('email')} value= {values.email} onBlur={handleBlur('email')}/>
                 <Input label="Contraseña" password={true} onChange={handleChange('password')} value={values.password} error={errors.password} onBlur={handleBlur('password')}/>
                
                 <Input label="Confirmar Contraseña" password={true} onChange={handleChange('confirmPassword')} value={values.confirmPassword} onBlur={handleBlur('confirmPassword')} error={passwordError}/>
@@ -101,6 +101,9 @@ const styles = StyleSheet.create({
     loggedYes: {
         color: colors.lightBlue,
         paddingHorizontal:5,
+    },
+    input: {
+        color:'black'
     }
     
 

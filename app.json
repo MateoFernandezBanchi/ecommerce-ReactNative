@@ -3,6 +3,7 @@
     "name": "ecommercebebidas",
     "slug": "reactNativeBebidas",
     "version": "1.0.0",
+    "platforms": ["android"],
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",

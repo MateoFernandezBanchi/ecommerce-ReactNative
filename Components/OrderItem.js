@@ -22,15 +22,15 @@ const OrderItem = ({ item }) => {
             <View style={styles.order}>
                 <View>
                     <Text style={styles.text}>{item.date}</Text>
-                    <View>
+                <View>
                     <FlatList 
                       data={itemSelected}
                       keyExtractor = {item => item.id}
                       renderItem ={RenderProducts}
                     />
-                    </View>
-                    <Text style={styles.total}>Total ${item.total}</Text>
                 </View>
+                    <Text style={styles.total}>Total ${item.total}</Text>
+            </View>
 
             </View>
         </View>

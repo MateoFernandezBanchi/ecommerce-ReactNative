@@ -11,7 +11,7 @@ const renderItem = ({item}) => {
       onSelect={() => {}}
       title = {item.title}
       image = {item.picture}
-      address = "Sagitario 264"
+      address = {item.address}
     />
   )
 }
